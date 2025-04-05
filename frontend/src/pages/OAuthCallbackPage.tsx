@@ -14,7 +14,6 @@ export function OAuthCallbackPage() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        // Récupérer le token depuis l'URL
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
         
@@ -23,10 +22,8 @@ export function OAuthCallbackPage() {
           return;
         }
         
-        // Stocker le token dans le localStorage
         localStorage.setItem('token', token);
         
-        // Récupérer les informations de l'utilisateur
         const userData = await userService.getCurrentUser();
         updateUser(userData);
         

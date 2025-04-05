@@ -7,9 +7,7 @@ import { Button } from '@/components/ui/button';
 import { userService } from '@/services/api';
 
 export function EtudiantDetailsPage() {
-  // Permettre à tous les types d'utilisateurs d'accéder à cette page
   const { user: _ } = useProtectedRoute({ 
-    // Pas de restriction de rôle - tous les utilisateurs connectés peuvent accéder
     redirectTo: '/login'
   });
   
@@ -48,7 +46,6 @@ export function EtudiantDetailsPage() {
     
     console.log("Utilisateur:", user);
     
-    // Vérifier l'ID de l'utilisateur
     const userId = user?.id || (user as any)?._id;
     
     if (!user || !userId) {

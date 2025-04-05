@@ -10,7 +10,6 @@ import { Trash } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export function EtudiantsListPage() {
-  // Protection de la route (seulement pour les intervenants et admins)
   useProtectedRoute({ 
     requiredRoles: [UserRole.INTERVENANT, UserRole.ADMIN], 
     redirectTo: '/login'
@@ -22,7 +21,6 @@ export function EtudiantsListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Vérifier si l'utilisateur est un administrateur
   const isAdmin = user?.role === UserRole.ADMIN;
 
   useEffect(() => {
@@ -67,7 +65,6 @@ export function EtudiantsListPage() {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')) {
       try {
         await userService.deleteUser(id);
-        // Mettre à jour la liste des étudiants après suppression
         setEtudiants(prevEtudiants => prevEtudiants.filter(etudiant => etudiant.id !== id));
         toast.success('Étudiant supprimé avec succès');
       } catch (error) {

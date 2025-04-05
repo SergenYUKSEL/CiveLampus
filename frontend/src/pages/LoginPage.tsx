@@ -27,7 +27,6 @@ export function LoginPage() {
   const [errors, setErrors] = useState<Partial<LoginFormData>>({});
   const [loading, setLoading] = useState(false);
   
-  // États pour la vérification OTP
   const [showOTPForm, setShowOTPForm] = useState(false);
   const [otp, setOtp] = useState('');
   const [userId, setUserId] = useState('');
@@ -36,7 +35,6 @@ export function LoginPage() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     
-    // Effacer les erreurs lors de la modification
     if (errors[name as keyof LoginFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }

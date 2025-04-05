@@ -9,7 +9,6 @@ import { userService } from '@/services/api';
 import { toast } from 'sonner';
 
 export function IntervenantsListPage() {
-  // Protection de la route (seulement pour admin)
   useProtectedRoute({ 
     requiredRoles: [UserRole.ADMIN], 
     redirectTo: '/login'

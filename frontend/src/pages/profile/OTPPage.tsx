@@ -10,7 +10,6 @@ import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 
 export function OTPPage() {
-  // Protection de la route (seulement pour les admins)
   useProtectedRoute({ 
     requiredRoles: [UserRole.ADMIN], 
     redirectTo: '/login'
@@ -23,7 +22,6 @@ export function OTPPage() {
   const [step, setStep] = useState<'initial' | 'setup' | 'enable' | 'disable'>('initial');
   const [loading, setLoading] = useState(false);
 
-  // Détermine l'état actuel en fonction de l'utilisateur
   useEffect(() => {
     if (user?.otpEnabled) {
       setStep('disable');
@@ -32,7 +30,6 @@ export function OTPPage() {
     }
   }, [user]);
 
-  // Commencer la configuration OTP
   const handleSetupOTP = async () => {
     setLoading(true);
     try {
@@ -49,7 +46,6 @@ export function OTPPage() {
     }
   };
 
-  // Vérifier et activer l'OTP
   const handleEnableOTP = async () => {
     if (!token) {
       toast.error('Veuillez saisir un code OTP');
@@ -60,7 +56,6 @@ export function OTPPage() {
     try {
       await authService.verifyAndEnableOTP(token);
       
-      // Mettre à jour l'état de l'utilisateur
       if (user) {
         updateUser({
           ...user,
@@ -79,7 +74,6 @@ export function OTPPage() {
     }
   };
 
-  // Désactiver l'OTP
   const handleDisableOTP = async () => {
     if (!token) {
       toast.error('Veuillez saisir un code OTP');
@@ -90,7 +84,6 @@ export function OTPPage() {
     try {
       await authService.disableOTP(token);
       
-      // Mettre à jour l'état de l'utilisateur
       if (user) {
         updateUser({
           ...user,

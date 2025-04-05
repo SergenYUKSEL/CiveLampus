@@ -3,13 +3,10 @@ const dotenv = require('dotenv');
 const path = require('path');
 const { User, UserRole } = require('../src/models/User');
 
-// Charger les variables d'environnement
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-// Configuration MongoDB
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/civelampus';
 
-// Données pour l'administrateur
 const adminData = {
   username: 'admin',
   email: 'admin@civelampus.fr',
@@ -17,14 +14,11 @@ const adminData = {
   role: UserRole.ADMIN
 };
 
-// Fonction pour créer l'administrateur
 async function createAdmin() {
   try {
-    // Connexion à MongoDB
     await mongoose.connect(MONGODB_URI);
     console.log('Connexion à MongoDB établie');
 
-    // Vérifier si un administrateur existe déjà
     const existingAdmin = await User.findOne({ role: UserRole.ADMIN });
     if (existingAdmin) {
       console.log('Un administrateur existe déjà:');
@@ -34,7 +28,6 @@ async function createAdmin() {
       return;
     }
 
-    // Créer le nouvel administrateur
     const admin = new User(adminData);
     await admin.save();
 
@@ -51,5 +44,4 @@ async function createAdmin() {
   }
 }
 
-// Exécuter la fonction
 createAdmin(); 

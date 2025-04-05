@@ -12,14 +12,14 @@ Ce projet est un POC (Proof of Concept) démontrant une implémentation sécuris
 
 ## Structure du projet
 
-- `/backend` - API Node.js/Express avec TypeScript
+- `/backend` - API Node.js/Express avec Javascript
 - `/frontend` - Application React/Vite avec TypeScript et Tailwind CSS
 
 ## Technologies utilisées
 
 ### Backend
 - Node.js + Express.js
-- TypeScript
+- Javascript
 - MongoDB (via Mongoose)
 - JWT pour l'authentification
 - OTP (TOTP) pour l'authentification à deux facteurs
@@ -30,6 +30,7 @@ Ce projet est un POC (Proof of Concept) démontrant une implémentation sécuris
 - React + Vite
 - TypeScript
 - Tailwind CSS
+- ShadCN
 - React Router pour la navigation
 - Zustand pour la gestion d'état
 - Axios pour les appels API
@@ -38,17 +39,16 @@ Ce projet est un POC (Proof of Concept) démontrant une implémentation sécuris
 
 Pour tester l'application, vous pouvez utiliser les comptes suivants :
 
-| Rôle       | Nom d'utilisateur | Mot de passe |
-|------------|-------------------|--------------|
-| Étudiant   | etudiant          | password     |
-| Intervenant| intervenant       | password     |
-| Admin      | admin             | password     |
+Vous devez lancer le script pour créer l'admin :
+```
+cd backend
+npm run create-admin
+```
+Cela va créer le compte administrateur.
+Vous devrez activer la double Authentification avant de pouvoir consulter la liste des intervenants.
 
 ## Installation et démarrage
 
-### Prérequis
-- Node.js (v16+)
-- MongoDB (local ou distant)
 
 ### Installation
 
@@ -72,18 +72,7 @@ npm install
 
 ### Configuration
 
-1. Créer un fichier `.env` dans le dossier `backend` (ou modifier celui existant) avec les variables suivantes :
-```
-PORT=5001
-MONGODB_URI=mongodb://localhost:27017/civelampus
-JWT_SECRET=votre_cle_secrete_jwt_tres_securisee
-NODE_ENV=development
-```
-
-2. Créer un fichier `.env` dans le dossier `frontend` (ou modifier celui existant) :
-```
-VITE_API_URL=http://localhost:5001/api
-```
+1. Créer un fichier `.env` soit depuis le .env.example, ou alors prenez les informations de mon .env sur le site de l'école.
 
 ### Lancement
 
@@ -111,6 +100,3 @@ Le POC implémente différents niveaux de contrôle d'accès :
 | /etudiants      | Intervenant, Admin   | Auth JWT + vérification rôle   |
 | /intervenants   | Admin uniquement     | Auth JWT + rôle + OTP (TOTP)   |
 
-## Licence
-
-Ce projet est sous licence MIT.
